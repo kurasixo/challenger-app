@@ -1,23 +1,9 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-
 module.exports = {
-  entry: './src/index.js',
-  target: 'web',
-
-  mode: 'production',
+  mode: 'development',
 
   output: {
-    path: `${__dirname}/build`,
-    filename: 'react-app.js',
-    publicPath: './',
+    path: `${__dirname}/../../build`,
   },
-
-  plugins: [
-    new HtmlWebpackPlugin({
-      filename: 'index.html',
-      template: 'public/index.html',
-    }),
-  ],
 
   module: {
     rules: [{
