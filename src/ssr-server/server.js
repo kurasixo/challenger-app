@@ -12,29 +12,29 @@ const PORT = 3000;
 const app = express();
 
 const store = createStore();
-// TODO: move to serialize
-const storeData = JSON.stringify(store.getState());
 
 const clientScript = './react-app.js';
 const reactRoot = ReactDOMServer.renderToString(<Root store={store} />);
 
 app.use(express.static('build', { index: false }));
 app.get('/', async (req, res) => {
+  // TODO: move to serialize
+  const storeData = JSON.stringify(store.getState());
+
   return res.send(
-    `
-    <html>
+    `<html>
       <head>
         <script>
           window.__data = ${storeData};
         </script>
+        <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
       </head>
 
-      <body>
+      <body style="font-family: 'Roboto', sans-serif; background-color: black;">
         <div id="root">${reactRoot}</div>
       </body>
       <script src=${clientScript}></script>
-    </html>
-    `,
+    </html>`,
   );
 });
 

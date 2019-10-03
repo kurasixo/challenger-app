@@ -1,5 +1,8 @@
 import React from 'react';
 
+import Time from './Time';
+import ClientRenderer from './ClientRenderer';
+
 class App extends React.Component {
   generate = () => {
     console.log('generate');
@@ -7,12 +10,18 @@ class App extends React.Component {
 
   render() {
     return (
-      <button
-        type="button"
-        onClick={this.generate}
-      >
-        Generate
-      </button>
+      <>
+        <ClientRenderer>
+          <Time />
+        </ClientRenderer>
+
+        <button
+          type="button"
+          onClick={this.generate}
+        >
+          Generate
+        </button>
+      </>
     );
   }
 }
