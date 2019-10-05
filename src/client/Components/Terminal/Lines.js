@@ -62,7 +62,7 @@ export class ActiveLine extends React.Component {
               fontFamily: 'inherit',
               border: 'none',
               color: 'white',
-              backgroundColor: 'black',
+              backgroundColor: 'grey',
               fontSize: 'calc(12px + 0.25vw)',
               outline: 'none',
               width: '90%',

@@ -9,7 +9,7 @@ class AppWrapper extends React.Component {
           display: 'flex',
           flexDirection: 'column',
           fontFamily: 'Fira Code, monospace',
-          backgroundColor: 'black',
+          backgroundColor: 'grey',
           width: '100%',
           height: '100%',
         }}
