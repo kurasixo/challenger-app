@@ -1,7 +1,10 @@
 import React from 'react';
 
 import Time from './Time';
-import ClientRenderer from './ClientRenderer';
+import Distro from './Distro';
+import Terminal from './Terminal/Terminal';
+import AppWrapper from './AppWrapper';
+import ClientRenderer from './utils/ClientRenderer';
 
 class App extends React.Component {
   generate = () => {
@@ -10,18 +13,14 @@ class App extends React.Component {
 
   render() {
     return (
-      <>
+      <AppWrapper>
         <ClientRenderer>
           <Time />
         </ClientRenderer>
 
-        <button
-          type="button"
-          onClick={this.generate}
-        >
-          Generate
-        </button>
-      </>
+        <Distro />
+        <Terminal />
+      </AppWrapper>
     );
   }
 }

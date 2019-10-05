@@ -33,6 +33,8 @@ module.exports = {
     'operator-linebreak': 0,
     'react/jsx-filename-extension': 0,
     'jsx-a11y/control-has-associated-label': 0,
+    'jsx-a11y/no-static-element-interactions': 0,
+    'jsx-a11y/label-has-associated-control': 0,
   },
   plugins: [
     'react',

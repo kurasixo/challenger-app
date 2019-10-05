@@ -17,6 +17,7 @@ const clientScript = './react-app.js';
 const reactRoot = ReactDOMServer.renderToString(<Root store={store} />);
 
 app.use(express.static('build', { index: false }));
+app.use(express.static('assets', { index: false }));
 app.get('/', async (req, res) => {
   // TODO: move to serialize
   const storeData = JSON.stringify(store.getState());
@@ -28,9 +29,11 @@ app.get('/', async (req, res) => {
           window.__data = ${storeData};
         </script>
         <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+        <link href="index.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/tonsky/FiraCode@1.207/distr/fira_code.css">
       </head>
 
-      <body style="font-family: 'Roboto', sans-serif; background-color: black;">
+      <body style="margin: 0; font-size: calc(12px + 0.25vw);">
         <div id="root">${reactRoot}</div>
       </body>
       <script src=${clientScript}></script>
