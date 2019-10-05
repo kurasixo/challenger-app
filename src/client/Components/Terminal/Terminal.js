@@ -5,7 +5,7 @@ import {
   Lines,
   ActiveLine,
   BottomLine,
-} from './Line';
+} from './Lines';
 
 class Terminal extends React.Component {
   state = { lines: [] }
