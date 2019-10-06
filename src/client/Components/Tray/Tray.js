@@ -1,13 +1,22 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import { restoreWindow, minimizeWindow } from '../../modules/windows/store/actions';
+
 import TrayPad from './TrayPad';
+import TrayIcon from './TrayIcon';
+import TrayMenu from './TrayMenu';
+
+const trayIcons = [{ name: 'Discord' }, { name: 'Discord 2' }];
 
 @connect((state) => {
   return {
-    windows: state.windows.list,
+    windowsList: state.windows.list,
     activeWindowName: state.windows.activeName,
   };
+}, {
+  restoreWindow,
+  minimizeWindow,
 })
 class Tray extends React.Component {
   renderTrayPad = (window) => {
@@ -15,19 +24,34 @@ class Tray extends React.Component {
 
     return (
       <TrayPad
-        key={window.name}
         window={window}
+        key={window.name}
+        restoreWindow={this.props.restoreWindow}
+        minimizeWindow={this.props.minimizeWindow}
         isActive={window.name === activeWindowName}
       />
     );
   }
 
+  renderTrayIcon = (icon) => {
+    return (
+      <TrayIcon key={icon.name} icon={icon} />
+    );
+  }
+
   render() {
-    const { windows } = this.props;
+    const { windowsList } = this.props;
 
     return (
-      <div style={{ display: 'flex', backgroundColor: 'black' }}>
-        {windows.map(this.renderTrayPad)}
+      <div className="tray-wrapper">
+        <TrayMenu />
+        <div className="tray-left">
+          {windowsList.map(this.renderTrayPad)}
+        </div>
+
+        <div className="tray-right">
+          {trayIcons.map(this.renderTrayIcon)}
+        </div>
       </div>
     );
   }

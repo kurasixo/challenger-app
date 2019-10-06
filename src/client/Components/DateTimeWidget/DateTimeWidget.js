@@ -25,7 +25,7 @@ const months = [
   'December',
 ];
 
-class Time extends React.Component {
+class DateTimeWidget extends React.Component {
   constructor(props) {
     super(props);
 
@@ -75,51 +75,23 @@ class Time extends React.Component {
   render() {
     return (
       <>
-        <div
-          style={{
-            top: '5em',
-            left: '5em',
-            lineHeight: 0.8,
-            color: 'white',
-            display: 'flex',
-            position: 'absolute',
-          }}
-        >
-          <div
-            style={{
-              fontSize: '5em',
-              paddingRight: '0.2em',
-            }}
-          >
+        <div className="datetime-widget-wrapper">
+          <div className="datetime-widget-time">
             {this.state.time}
           </div>
 
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-            }}
-          >
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-              }}
-            >
-              <div
-                style={{ fontSize: '2em' }}
-              >
+          <div className="datetime-widget-date-wrapper">
+            <div className="datetime-widget-date-top">
+              <div className="datetime-widget-date-large">
                 {this.state.date}
               </div>
 
-              <div style={{ fontSize: '0.8em' }}>{months[this.state.month]}</div>
+              <div className="datetime-widget-date-medium">{months[this.state.month]}</div>
 
-              <div style={{ fontSize: '0.8em' }}>{this.state.year}</div>
+              <div className="datetime-widget-date-medium">{this.state.year}</div>
             </div>
 
-            <div
-              style={{ flex: 1, fontSize: '3em' }}
-            >
+            <div className="datetime-widget-date-large">
               {weekDays[this.state.day]}
             </div>
           </div>
@@ -129,4 +101,4 @@ class Time extends React.Component {
   }
 }
 
-export default Time;
+export default DateTimeWidget;

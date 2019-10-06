@@ -22,29 +22,10 @@ const myFavOS = `
 /+.                                  -o.
 `;
 
-const minWidth = 269;
-const minHeight = 285;
-
 const Distro = () => {
   return (
-    <div
-      style={{
-        color: 'white',
-        position: 'absolute',
-        left: '50%',
-        top: '50%',
-        marginTop: `-${minHeight / 2}px`,
-        marginLeft: `-${minWidth / 2}px`,
-        fontSize: '0.7em',
-      }}
-    >
-      <div
-        style={{
-          whiteSpace: 'pre-wrap',
-          maxWidth: `${minWidth}px`,
-          minHeight: `${minHeight}px`,
-        }}
-      >
+    <div className="distro-wrapper">
+      <div className="distro-content">
         {myFavOS}
       </div>
     </div>

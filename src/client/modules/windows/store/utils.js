@@ -1,5 +1,25 @@
 import omitBy from 'lodash/omitBy';
 
+const generateListFromMap = (map) => {
+  return Object.values(map);
+};
+
+const updateWindowInMap = (state, action, currentWindow, setActive) => {
+  const activeName = setActive
+    ? action.windowName
+    : null;
+
+  const newWindowsMap = { ...state.map, [action.windowName]: currentWindow };
+  const newWindowsList = generateListFromMap(newWindowsMap);
+
+  return {
+    ...state,
+    activeName,
+    map: newWindowsMap,
+    list: newWindowsList,
+  };
+};
+
 export const doOpenWindow = (state, action, setActive = true) => {
   const processedWindow = {
     ...action.window,
@@ -8,19 +28,19 @@ export const doOpenWindow = (state, action, setActive = true) => {
 
   const activeName = setActive
     ? processedWindow.name
-    : state.activeName;
+    : null;
+
+  const newWindowsMap = {
+    ...state.map,
+    [action.window.name]: processedWindow,
+  };
+  const newWindowsList = generateListFromMap(newWindowsMap);
 
   return {
     ...state,
     activeName,
-    list: [
-      ...state.list,
-      processedWindow,
-    ],
-    map: {
-      ...state.map,
-      [action.window.name]: processedWindow,
-    },
+    map: newWindowsMap,
+    list: newWindowsList,
   };
 };
 
@@ -28,7 +48,7 @@ export const doCloseWindow = (state, action) => {
   const predicate = ({ name }) => action.window.name !== name;
 
   const newWindowsMap = omitBy(state.map, predicate);
-  const newWindowsList = state.list.filter(predicate);
+  const newWindowsList = generateListFromMap(newWindowsMap);
 
   return {
     ...state,
@@ -41,7 +61,7 @@ export const doSetActiveWindow = (state, action) => {
   if (action.activeStatus) {
     return {
       ...state,
-      activeName: action.window.name,
+      activeName: action.windowName,
     };
   }
 
@@ -53,19 +73,19 @@ export const doSetActiveWindow = (state, action) => {
 
 export const doMinimizeWindow = (state, action) => {
   const currentWindow = {
-    ...state.map[action.window.name],
+    ...state.map[action.windowName],
     isVisible: false,
   };
 
-  return doOpenWindow(state, { ...action, window: currentWindow }, false);
+  return updateWindowInMap(state, action, currentWindow, false);
 };
 
 
 export const doRestoreWindow = (state, action) => {
   const currentWindow = {
-    ...state.map[action.window.name],
+    ...state.map[action.windowName],
     isVisible: true,
   };
 
-  return doOpenWindow(state, { ...action, window: currentWindow });
+  return updateWindowInMap(state, action, currentWindow, true);
 };

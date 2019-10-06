@@ -19,8 +19,8 @@ const withFocus = (name) => (Component) => {
   class WithFocus extends React.Component {
     componentRef = React.createRef()
 
-    onFocus = () => {
-      this.props.setActiveWindow({ name }, true);
+    onFocus = (evnt) => {
+      this.props.setActiveWindow(name, true);
 
       if (this.componentRef.current) {
         this.componentRef.current.focus();
@@ -28,24 +28,21 @@ const withFocus = (name) => (Component) => {
     }
 
     onBlur = () => {
-      this.props.setActiveWindow({ name }, false);
+      this.props.setActiveWindow(name, false);
     }
 
     render() {
       const { isCurrentWindowVisible } = this.props;
 
-      const DeligatedComponent = isCurrentWindowVisible
-        ? (
-          <Component
-            name={name}
-            onBlur={this.onBlur}
-            onFocus={this.onFocus}
-            withFocusPropRef={this.componentRef}
-          />
-        )
-        : null;
-
-      return DeligatedComponent;
+      return (
+        <Component
+          name={name}
+          onBlur={this.onBlur}
+          onFocus={this.onFocus}
+          withFocusPropRef={this.componentRef}
+          isCurrentWindowVisible={isCurrentWindowVisible}
+        />
+      );
     }
   }
 

@@ -51,11 +51,14 @@ class Terminal extends React.Component {
         <TerminalView
           onBlur={this.props.onBlur}
           onFocus={this.props.onFocus}
+          isCurrentWindowVisible={this.props.isCurrentWindowVisible}
         >
           <Lines>
             {this.state.lines.map(this.renderLine)}
             <ActiveLine
               onSubmit={this.onSubmit}
+              onBlur={this.props.onBlur}
+              onFocus={this.props.onFocus}
               withFocusPropRef={this.props.withFocusPropRef}
             />
           </Lines>

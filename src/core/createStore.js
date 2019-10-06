@@ -4,15 +4,15 @@ import {
   applyMiddleware as _applyMiddleware,
 } from 'redux';
 
-import { composeWithDevTools } from 'redux-devtools-extension';
+import logger from 'redux-logger';
 
 import { reducer as authReducer } from '../client/modules/auth';
 import { reducer as windowsReducer } from '../client/modules/windows';
 
-const middlewares = [];
+const middlewares = [logger];
 
 const applyMiddleware = (_middlewares) => {
-  return composeWithDevTools(_applyMiddleware(..._middlewares));
+  return _applyMiddleware(..._middlewares);
 };
 
 const createStore = (data = {}) => {

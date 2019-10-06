@@ -2,17 +2,7 @@ import React from 'react';
 
 export const Lines = ({ children }) => {
   return (
-    <ul
-      style={{
-        listStyle: 'none',
-        padding: 0,
-        margin: 0,
-        flex: 1,
-        alignSelf: 'flex-start',
-        overflow: 'scroll',
-        width: '100%',
-      }}
-    >
+    <ul className="terminal-lines-wrapper">
       {children}
     </ul>
   );
@@ -20,12 +10,7 @@ export const Lines = ({ children }) => {
 
 export const Line = ({ children }) => {
   return (
-    <li
-      style={{
-        color: 'white',
-        marginTop: '0.15rem',
-      }}
-    >
+    <li className="terminal-line">
       {children}
     </li>
   );
@@ -48,27 +33,16 @@ export class ActiveLine extends React.Component {
   render() {
     return (
       <Line>
-        <form
-          onSubmit={this.onSubmit}
-          style={{ width: '100%', margin: 0 }}
-        >
-          <label style={{ height: 'calc(12px + 0.25vw)' }}>$ </label>
+        <form onSubmit={this.onSubmit}>
+          <label className="terminal-activeline-label">$ </label>
 
           <input
-            ref={this.props.withFocusPropRef}
             id="activeLine"
             autoComplete="off"
-            onChange={this.onChange}
-            style={{
-              fontFamily: 'inherit',
-              border: 'none',
-              color: 'white',
-              backgroundColor: 'grey',
-              fontSize: 'calc(12px + 0.25vw)',
-              outline: 'none',
-              width: '90%',
-            }}
             value={this.state.text}
+            onChange={this.onChange}
+            ref={this.props.withFocusPropRef}
+            className="terminal-activeline-input"
           />
         </form>
       </Line>
