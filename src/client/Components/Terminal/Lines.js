@@ -55,6 +55,7 @@ export class ActiveLine extends React.Component {
           <label style={{ height: 'calc(12px + 0.25vw)' }}>$ </label>
 
           <input
+            ref={this.props.withFocusPropRef}
             id="activeLine"
             autoComplete="off"
             onChange={this.onChange}

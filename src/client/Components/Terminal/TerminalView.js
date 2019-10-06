@@ -20,6 +20,7 @@ class TerminalView extends React.Component {
   render() {
     return (
       <div
+        tabIndex="0"
         onBlur={this.props.onBlur}
         onFocus={this.props.onFocus}
         style={{ alignSelf: 'flex-end', position: 'absolute', top: '5em' }}

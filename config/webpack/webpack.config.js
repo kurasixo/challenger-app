@@ -8,5 +8,6 @@ module.exports = {
   output: {
     ...commonConfig.output,
     filename: 'react-app.js',
+    sourceMapFilename: '[file].map',
   },
 };

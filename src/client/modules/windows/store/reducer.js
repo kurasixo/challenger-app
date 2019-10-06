@@ -2,8 +2,10 @@ import * as AT from './actionTypes';
 import * as utils from './utils';
 
 const initialState = {
-  activeWindowName: null,
-  windowsMap: {},
+  activeName: null,
+
+  list: [],
+  map: {},
 };
 
 const windowsReducer = (state = initialState, action) => {
@@ -26,6 +28,17 @@ const windowsReducer = (state = initialState, action) => {
         ...utils.doSetActiveWindow(state, action),
       };
 
+    case AT.MINIMIZE_WINDOW:
+      return {
+        ...state,
+        ...utils.doMinimizeWindow(state, action),
+      };
+
+    case AT.RESTORE_WINDOW:
+      return {
+        ...state,
+        ...utils.doRestoreWindow(state, action),
+      };
 
     default: return state;
   }

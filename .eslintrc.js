@@ -35,6 +35,7 @@ module.exports = {
     'jsx-a11y/control-has-associated-label': 0,
     'jsx-a11y/no-static-element-interactions': 0,
     'jsx-a11y/label-has-associated-control': 0,
+    'jsx-a11y/no-noninteractive-tabindex': 0,
   },
   plugins: [
     'react',
