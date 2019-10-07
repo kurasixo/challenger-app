@@ -9,6 +9,12 @@ export const Lines = ({ children }) => {
 };
 
 export const Line = ({ children }) => {
+  if (typeof children === 'string') {
+    return (
+      <li className="terminal-line" dangerouslySetInnerHTML={{ __html: children }} />
+    );
+  }
+
   return (
     <li className="terminal-line">
       {children}

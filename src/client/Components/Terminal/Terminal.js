@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import Window from '../../modules/windows/Components/Window';
 import { closeWindow } from '../../modules/windows/store/actions';
 
+import { validateCommand } from './utils';
+
 import TerminalView from './TerminalView';
 import {
   Line,
@@ -16,28 +18,11 @@ import {
 class Terminal extends React.Component {
   state = { lines: [] }
 
-  onSubmit = (lineValue) => {
-    const validatedLines = this.validateLine(lineValue);
+  onSubmit = async (lineValue) => {
+    const { lines } = this.state;
+    const newLines = await validateCommand(lineValue, lines);
 
-    this.setState({ lines: validatedLines });
-  }
-
-  validateLine = (lineValue) => {
-    const tokenedLineValue = this.tokenizeLineValue(lineValue);
-
-    if (tokenedLineValue !== 'clear') {
-      return [
-        ...this.state.lines,
-        lineValue,
-        `command not found: ${tokenedLineValue}`,
-      ];
-    }
-
-    return [];
-  }
-
-  tokenizeLineValue = (lineValue) => {
-    return lineValue.split('$ ')[1];
+    this.setState({ lines: newLines });
   }
 
   renderLine = (line, index) => {
