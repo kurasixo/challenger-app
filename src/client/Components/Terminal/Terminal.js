@@ -1,6 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import Window from '../../modules/windows/Components/Window';
+import { closeWindow } from '../../modules/windows/store/actions';
 
 import TerminalView from './TerminalView';
 import {
@@ -10,6 +12,7 @@ import {
   BottomLine,
 } from './Lines';
 
+@connect(null, { closeWindow })
 class Terminal extends React.Component {
   state = { lines: [] }
 
@@ -47,18 +50,20 @@ class Terminal extends React.Component {
 
   render() {
     return (
-      <Window onFocus={this.props.onFocus}>
+      <Window
+        window={this.props.window}
+        onFocus={this.props.onFocus}
+        onClose={this.props.closeWindow}
+        isCurrentWindowVisible={this.props.isCurrentWindowVisible}
+      >
         <TerminalView
           onBlur={this.props.onBlur}
           onFocus={this.props.onFocus}
-          isCurrentWindowVisible={this.props.isCurrentWindowVisible}
         >
           <Lines>
             {this.state.lines.map(this.renderLine)}
             <ActiveLine
               onSubmit={this.onSubmit}
-              onBlur={this.props.onBlur}
-              onFocus={this.props.onFocus}
               withFocusPropRef={this.props.withFocusPropRef}
             />
           </Lines>

@@ -20,21 +20,23 @@ export const Line = ({ children }) => {
 export class ActiveLine extends React.Component {
   state = { text: '' }
 
+  label = 'hackme $'
+
   onChange = (event) => {
     this.setState({ text: event.target.value });
   }
 
   onSubmit = (event) => {
     event.preventDefault();
-    this.props.onSubmit(`$ ${this.state.text}`);
+    this.props.onSubmit(`${this.label} ${this.state.text}`);
     this.setState({ text: '' });
   }
 
   render() {
     return (
       <Line>
-        <form onSubmit={this.onSubmit}>
-          <label className="terminal-activeline-label">$ </label>
+        <form style={{ display: 'flex' }} onSubmit={this.onSubmit}>
+          <label className="terminal-activeline-label">{this.label}</label>
 
           <input
             id="activeLine"

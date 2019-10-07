@@ -1,9 +1,9 @@
 import React from 'react';
 
-const TrayIcon = ({ icon }) => {
+const TrayIcon = ({ icon: Icon }) => {
   return (
     <div className="tray-icon">
-      {icon.name}
+      <Icon.Component />
     </div>
   );
 };

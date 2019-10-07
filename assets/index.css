@@ -4,21 +4,42 @@
   outline: none;
 }
 
+.window__is-invisible {
+  opacity: 0;
+  visibility: hidden;
+
+  transition: visibility 100ms 100ms, opacity 200ms linear;
+}
+
+.window__is-visible {
+  opacity: 1;
+  visibility: visible;
+
+  transition: opacity 200ms linear;
+}
+
+.window {
+  position: absolute;
+  border: 2px solid grey;
+  box-shadow: 1px 1px 11px black;
+}
+
 .app-wrapper {
   user-select: none;
   display: flex;
   flex-direction: column;
   font-family: Fira Code, monospace;
-  background-color: black;
+  background-color: royalblue;
+  /* background: linear-gradient(180deg, tomato 35%, yellow 100%); */
   width: 100%;
   height: 100%;
 }
 
 .tray-wrapper {
-  height: 22px;
   display: flex;
+  background-color: #494949;
   flex-direction: row;
-  background-color: gray;
+  padding: 2px 0;
 }
 
 .tray-left {
@@ -33,37 +54,39 @@
 }
 
 .tray-menu {
-  margin: 0 5px;
-  padding: 0 10px;
-  background-color: white;
+  padding: 0 5px;
 }
 
 .tray-menu-icon {
-  background-color: white;
+  width: 22px;
+  height: 22px;
 }
 
 .tray-menu-items-wrapper {
-  z-index: 5;
+  z-index: 1;
   top: 22px;
   left: 0px;
   width: 170px;
   position: absolute;
   display: flex;
+  color: grey;
   flex-direction: column;
-  background-color: darkgray;
+  background-color: #686868;
 }
 
 .tray-menu-delimiter {
-  z-index: 5;
+  z-index: 1;
   height: 1px;
   width: 100%;
   background-color: black;
 }
 
 .tray-menu-item {
-  height: 30px;
+  height: 20px;
   padding-left: 10px;
-  padding-top: 10px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  color: white;
   justify-content: flex-start;
   display: flex;
 }
@@ -86,24 +109,24 @@
   color: white;
   padding-left: 10px;
   margin-right: 5px;
-  border-radius: 5px;
+  border-radius: 2px;
   background-color: darkgrey;
   display: flex;
   justify-content: flex-start;
   min-width: 150px;
-}
-
-.tray-pad:hover {
   opacity: 0.7;
 }
 
+.tray-pad:hover {
+  /* opacity: 0.7; */
+}
+
 .tray-pad__is-active {
-  color: white;
-  background-color: blue;
+  opacity: 1;
+  /* background-color: blue; */
 }
 
 .datetime-widget-wrapper {
-  z-index: 1;
   top: 10em;
   left: 4em;
   line-height: 0.8;
@@ -153,23 +176,17 @@
 }
 
 .terminal-wrapper {
-  z-index: 2;
-  align-self: flex-end;
-  position: absolute;
-  top: 5em;
-  color: green;
+  color: #abca71;
+  /* the same as app wrapper background color */
+  background-color: black;
+  /* position: absolute; */
 }
 
 .terminal-view {
-  margin: 0;
-  margin-top: 20px;
-  margin-right: 20px;
-  border: 2px solid grey;
-  border-radius: .25rem;
-  box-shadow: 1px 1px 11px rgba(0, 0, 0, 0.25);
-  height: 500px;
-  max-width: 600px;
   min-width: 500px;
+  max-width: 600px;
+  min-height: 500px;
+  max-height: 500px;
   padding: 0.5rem;
   display: flex;
   flex-direction: column;
@@ -186,7 +203,7 @@
 }
 
 .terminal-line {
-  color: green;
+  color: #abca71;
   margin-top: 0.15rem;
 }
 
@@ -200,12 +217,12 @@
 }
 
 .terminal-activeline-input {
+  flex: 1;
   font-family: inherit;
   border: none;
-  color: green;
-  /* the same as app wrapper background color */
+  color: #abca71;
   background-color: black;
   font-size: calc(12px + 0.25vw);
   outline: none;
-  width: 90%;
+  margin-left: 10px;
 }

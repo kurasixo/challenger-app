@@ -45,7 +45,7 @@ export const doOpenWindow = (state, action, setActive = true) => {
 };
 
 export const doCloseWindow = (state, action) => {
-  const predicate = ({ name }) => action.window.name !== name;
+  const predicate = ({ name }) => action.window.name === name;
 
   const newWindowsMap = omitBy(state.map, predicate);
   const newWindowsList = generateListFromMap(newWindowsMap);

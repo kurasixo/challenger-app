@@ -39,6 +39,8 @@ module.exports = {
     'object-curly-newline': 0,
     'jsx-a11y/click-events-have-key-events': 0,
     'jsx-a11y/mouse-events-have-key-events': 0,
+    'react/static-property-placement': 0,
+    'react/forbid-prop-types': 0,
   },
   plugins: [
     'react',

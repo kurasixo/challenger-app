@@ -4,10 +4,10 @@ class TerminalView extends React.Component {
   render() {
     return (
       <div
+        tabIndex="0"
         onBlur={this.props.onBlur}
         onFocus={this.props.onFocus}
         className="terminal-wrapper"
-        style={{ visibility: this.props.isCurrentWindowVisible ? 'visible' : 'hidden' }}
       >
         <div className="terminal-view">
           {this.props.children}

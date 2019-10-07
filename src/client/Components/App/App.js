@@ -4,24 +4,21 @@ import { connect } from 'react-redux';
 import Tray from '../Tray/Tray';
 import AppWrapper from './AppWrapper';
 import Distro from '../Distro/Distro';
+import Browser from '../Browser/Browser';
 import Terminal from '../Terminal/Terminal';
 import DateTimeWidget from '../DateTimeWidget/DateTimeWidget';
 
 import withFocus from '../../utils/withFocus';
-import { windowTitles } from '../../utils/consts';
+import { TerminalWindow, BrowserWindow } from '../../utils/consts';
 import ClientRenderer from '../../utils/ClientRenderer';
 import { openWindow } from '../../modules/windows/store/actions';
 
-const WithFocusTerminal = withFocus(windowTitles.TerminalWindow)(Terminal);
+const WithFocusBrowser = withFocus(BrowserWindow.name)(Browser);
+const WithFocusTerminal = withFocus(TerminalWindow.name)(Terminal);
 
 const startupApps = [
-  {
-    name: windowTitles.TerminalWindow,
-    icon: '',
-    meta: {
-      opensOnMount: true,
-    },
-  },
+  // BrowserWindow,
+  TerminalWindow,
 ];
 
 @connect(null, { openWindow })
@@ -44,6 +41,7 @@ class App extends React.Component {
         </ClientRenderer>
 
         <Distro />
+        <WithFocusBrowser />
         <WithFocusTerminal />
       </AppWrapper>
     );

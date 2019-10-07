@@ -4,10 +4,7 @@ import { connect } from 'react-redux';
 import { restoreWindow, minimizeWindow } from '../../modules/windows/store/actions';
 
 import TrayPad from './TrayPad';
-import TrayIcon from './TrayIcon';
 import TrayMenu from './TrayMenu';
-
-const trayIcons = [{ name: 'Discord' }, { name: 'Discord 2' }];
 
 @connect((state) => {
   return {
@@ -33,12 +30,6 @@ class Tray extends React.Component {
     );
   }
 
-  renderTrayIcon = (icon) => {
-    return (
-      <TrayIcon key={icon.name} icon={icon} />
-    );
-  }
-
   render() {
     const { windowsList } = this.props;
 
@@ -47,10 +38,6 @@ class Tray extends React.Component {
         <TrayMenu />
         <div className="tray-left">
           {windowsList.map(this.renderTrayPad)}
-        </div>
-
-        <div className="tray-right">
-          {trayIcons.map(this.renderTrayIcon)}
         </div>
       </div>
     );

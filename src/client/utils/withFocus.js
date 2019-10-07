@@ -11,6 +11,7 @@ const getIsCurrentWindowVisible = (state, name) => {
 const withFocus = (name) => (Component) => {
   @connect((state) => {
     return {
+      window: state.windows.map[name] || null,
       isCurrentWindowVisible: getIsCurrentWindowVisible(state, name),
     };
   }, {
@@ -19,7 +20,7 @@ const withFocus = (name) => (Component) => {
   class WithFocus extends React.Component {
     componentRef = React.createRef()
 
-    onFocus = (evnt) => {
+    onFocus = () => {
       this.props.setActiveWindow(name, true);
 
       if (this.componentRef.current) {
@@ -34,11 +35,11 @@ const withFocus = (name) => (Component) => {
     render() {
       const { isCurrentWindowVisible } = this.props;
 
-      return (
+      return this.props.window && (
         <Component
-          name={name}
           onBlur={this.onBlur}
           onFocus={this.onFocus}
+          window={this.props.window}
           withFocusPropRef={this.componentRef}
           isCurrentWindowVisible={isCurrentWindowVisible}
         />

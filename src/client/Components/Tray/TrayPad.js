@@ -17,6 +17,13 @@ const TrayPad = ({ window, isActive, restoreWindow, minimizeWindow }) => {
       onClick={onClick}
       className={cs('tray-pad', { 'tray-pad__is-active': window.isVisible && isActive })}
     >
+      <img
+        alt=""
+        className="tray-menu-icon"
+        src={window.icon || './tray-icon.png'}
+        style={{ paddingRight: '5px' }}
+      />
+
       {window.name}
     </div>
   );

@@ -1,13 +1,19 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import TrayMenuIcon from './TrayMenuIcon';
 import TrayMenuItem from './TrayMenuItem';
 import TrayMenuDelimiter from './TrayMenuDelimiter';
 
+import { openWindow } from '../../modules/windows/store/actions';
+import { BrowserWindow, TerminalWindow } from '../../utils/consts';
+
 const trayMenuItems = [{
-  name: 'Web Browser',
+  ...BrowserWindow,
   isApp: true,
-  icon: '',
+}, {
+  ...TerminalWindow,
+  isApp: true,
 }, {
   name: 2,
   isDelimiter: true,
@@ -40,6 +46,7 @@ const trayMenuItems = [{
   icon: '',
 }];
 
+@connect(null, { openWindow })
 class TrayMenu extends React.Component {
   state = { isMenuOpened: false };
 
@@ -51,10 +58,14 @@ class TrayMenu extends React.Component {
     });
   }
 
-  getOnClickItem = () => {
-    return (event) => {
-      event.stopPropagation();
-    };
+  getOnClickItem = (trayMenuItem, isApp) => {
+    if (isApp) {
+      return () => {
+        this.props.openWindow(trayMenuItem);
+      };
+    }
+
+    return () => {};
   }
 
   renderTrayMenuItem = (trayMenuItem) => {
@@ -64,7 +75,7 @@ class TrayMenu extends React.Component {
       );
     }
 
-    const onClick = this.getOnClickItem();
+    const onClick = this.getOnClickItem(trayMenuItem, trayMenuItem.isApp);
     return (
       <TrayMenuItem
         onClick={onClick}
