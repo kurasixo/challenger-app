@@ -7,7 +7,6 @@ class BrowserView extends React.Component {
     const { link } = this.state;
 
     const response = await fetch(link);
-    console.log(response);
     const body = await response.text();
     this.setState({ response: body });
   }

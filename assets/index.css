@@ -175,8 +175,8 @@
 
 .distro-content {
   white-space: pre-wrap;
-  max-width: 269;
-  min-height: 285;
+  /* max-width: 269; */
+  /* min-height: 285; */
 }
 
 .terminal-wrapper {
