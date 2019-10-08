@@ -11,6 +11,7 @@ import createStore from '../core/createStore';
 const PORT = 3000;
 const app = express();
 
+// const store = createStore({ auth: { user: true } });
 const store = createStore();
 
 const clientScript = './react-app.js';

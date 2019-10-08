@@ -5,8 +5,13 @@ import TrayMenuIcon from './TrayMenuIcon';
 import TrayMenuItem from './TrayMenuItem';
 import TrayMenuDelimiter from './TrayMenuDelimiter';
 
+import { logout } from '../../modules/auth/store/actions';
 import { openWindow } from '../../modules/windows/store/actions';
 import { BrowserWindow, TerminalWindow } from '../../utils/consts';
+
+const possibleActions = {
+  logout,
+};
 
 const trayMenuItems = [{
   ...BrowserWindow,
@@ -43,10 +48,11 @@ const trayMenuItems = [{
 }, {
   name: 'Logout',
   isApp: false,
+  action: 'logout',
   icon: '',
 }];
 
-@connect(null, { openWindow })
+@connect(null, { openWindow, ...possibleActions })
 class TrayMenu extends React.Component {
   state = { isMenuOpened: false };
 
@@ -65,7 +71,7 @@ class TrayMenu extends React.Component {
       };
     }
 
-    return () => {};
+    return this.props[trayMenuItem.action] || (() => {});
   }
 
   renderTrayMenuItem = (trayMenuItem) => {

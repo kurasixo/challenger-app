@@ -73,8 +73,8 @@ class Window extends React.Component {
       <div
         style={{ top, left }}
         className={cs('window', {
-          'window__is-visible': this.props.isCurrentWindowVisible,
-          'window__is-invisible': !this.props.isCurrentWindowVisible,
+          'is-visible': this.props.isCurrentWindowVisible,
+          'is-invisible': !this.props.isCurrentWindowVisible,
         })}
       >
         <div
